@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -30,7 +31,7 @@ public class Produtos {
     @ManyToMany(mappedBy = "produtos")
     private List<Pedido> pedidos;
 
-    @ManyToOne(mappedBy = "produtos")
+    @OneToMany(mappedBy = "produtos")
     private List<Avaliacoes> avaliacoes;
 
     @ManyToOne
