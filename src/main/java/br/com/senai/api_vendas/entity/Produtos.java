@@ -1,12 +1,14 @@
 package br.com.senai.api_vendas.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -28,8 +30,14 @@ public class Produtos {
     @NotBlank(message = "O campo descrição não pode ser vazio")
     private Integer preco;
 
-    @ManyToMany(mappedBy = "produtos")
-    private List<Pedido> pedidos;
+    @ManyToMany
+    @JoinTable(
+        name = "Pedidos_produtos",
+        joinColumns = @JoinColumn(name = "fk_produto"),
+        inverseJoinColumns = @JoinColumn(name = "fk_pedido")
+    )
+    Set<Pedido> Pedidos_produtos;
+    
 
     @OneToMany(mappedBy = "produtos")
     private List<Avaliacoes> avaliacoes;
@@ -62,13 +70,7 @@ public class Produtos {
         this.preco = preco;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
+    
 
     public List<Avaliacoes> getAvaliacoes() {
         return avaliacoes;
