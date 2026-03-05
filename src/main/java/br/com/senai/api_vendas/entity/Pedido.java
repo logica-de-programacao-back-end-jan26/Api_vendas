@@ -23,10 +23,10 @@ public class Pedido {
     private LocalDateTime data_pedido;
 
     @NotBlank(message = "O campo quantidade do pedido não pode ser vazio")
-    private int quantidade_pedido;
+    private Integer quantidade_pedido;
 
     @NotBlank(message = "O campo status do pedido não pode ser vazio")
-    private boolean status_pedido;
+    private Boolean status_pedido;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente")
@@ -52,19 +52,19 @@ public class Pedido {
         this.data_pedido = data_pedido;
     }
 
-    public int getQuantidade_pedido() {
+    public Integer getQuantidade_pedido() {
         return quantidade_pedido;
     }
 
-    public void setQuantidade_pedido(int quantidade_pedido) {
+    public void setQuantidade_pedido(Integer quantidade_pedido) {
         this.quantidade_pedido = quantidade_pedido;
     }
 
-    public boolean isStatus_pedido() {
+    public Boolean getStatus_pedido() {
         return status_pedido;
     }
 
-    public void setStatus_pedido(boolean status_pedido) {
+    public void setStatus_pedido(Boolean status_pedido) {
         this.status_pedido = status_pedido;
     }
 

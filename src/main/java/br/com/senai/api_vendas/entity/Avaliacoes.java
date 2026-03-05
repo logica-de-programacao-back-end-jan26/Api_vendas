@@ -20,7 +20,7 @@ public class Avaliacoes {
     
     @NotBlank(message = "O campo nota não pode ser vazio")
     @Size(min = 1, max = 5, message = "A nota deve ser entre 1 e 5")
-    private int nota;
+    private Integer  nota;
     
     @NotBlank(message = "O campo comentário não pode ser vazio")
     @Size(max = 200, message = "O comentário deve ter no máximo 255 caracteres")
@@ -47,12 +47,12 @@ public class Avaliacoes {
     }
 
 
-    public int getNota() {
+    public Integer getNota() {
         return nota;
     }
 
 
-    public void setNota(int nota) {
+    public void setNota(Integer nota) {
         this.nota = nota;
     }
 

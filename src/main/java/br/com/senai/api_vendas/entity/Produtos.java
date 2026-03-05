@@ -26,7 +26,7 @@ public class Produtos {
     private String nome;
     
     @NotBlank(message = "O campo descrição não pode ser vazio")
-    private int preco;
+    private Integer preco;
 
     @ManyToMany(mappedBy = "produtos")
     private List<Pedido> pedidos;
@@ -54,11 +54,11 @@ public class Produtos {
         this.nome = nome;
     }
 
-    public int getPreco() {
+    public Integer getPreco() {
         return preco;
     }
 
-    public void setPreco(int preco) {
+    public void setPreco(Integer preco) {
         this.preco = preco;
     }
 
