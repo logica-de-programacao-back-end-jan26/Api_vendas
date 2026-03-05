@@ -6,4 +6,5 @@ import br.com.senai.api_vendas.entity.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     
+    Boolean existsByEmail(String Email);
 }

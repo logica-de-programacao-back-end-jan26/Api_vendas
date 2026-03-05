@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
 public class Pedido {
@@ -18,7 +19,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
+    @PastOrPresent(message = "A data do pedido deve ser no presente")
     @NotBlank(message = "O campo data do pedido não pode ser vazio")
     private LocalDateTime data_pedido;
 
