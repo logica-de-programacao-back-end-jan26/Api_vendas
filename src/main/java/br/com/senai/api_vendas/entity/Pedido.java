@@ -3,8 +3,7 @@ package br.com.senai.api_vendas.entity;
 
 
 import java.time.LocalDateTime;
-import java.util.Set;
-
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,12 +35,9 @@ public class Pedido {
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_produto")
-    private Produtos produto;
-
-    @ManyToMany(mappedBy = "Pedidos_produtos")
-    Set<Produtos> produtos;
+   
+    @ManyToMany(mappedBy = "pedidos")
+    private List<Produtos> produtos;
    
 
     public Long getId() {
@@ -84,12 +80,12 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Produtos getProduto() {
-        return produto;
+    public List<Produtos> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto(Produtos produto) {
-        this.produto = produto;
+    public void setProdutos(List<Produtos> produtos) {
+        this.produtos = produtos;
     }
 
     

@@ -1,5 +1,7 @@
 package br.com.senai.api_vendas.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,9 +34,8 @@ public class Avaliacoes {
     private Cliente cliente;
 
 
-    @OneToMany 
-    @JoinColumn(name = "fk_produto")
-    private Produtos produto;
+    @OneToMany (mappedBy = "avaliacoes")
+    private List<Produtos> produto;
 
 
     public Long getId() {
@@ -77,16 +78,14 @@ public class Avaliacoes {
     }
 
 
-    public Produtos getProduto() {
+    public List<Produtos> getProduto() {
         return produto;
     }
 
 
-    public void setProduto(Produtos produto) {
+    public void setProduto(List<Produtos> produto) {
         this.produto = produto;
     }
-
-
 
     
 }
