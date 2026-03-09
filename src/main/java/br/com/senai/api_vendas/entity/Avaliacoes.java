@@ -1,6 +1,6 @@
 package br.com.senai.api_vendas.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -31,11 +30,14 @@ public class Avaliacoes {
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente")
+    @JsonIgnoreProperties("cliente")
     private Cliente cliente;
 
 
-    @OneToMany (mappedBy = "avaliacoes")
-    private List<Produtos> produto;
+    @ManyToOne
+    @JoinColumn(name = "fk_produto")
+    @JsonIgnoreProperties("produtos")
+    private Produtos produtos;
 
 
     public Long getId() {
@@ -78,14 +80,12 @@ public class Avaliacoes {
     }
 
 
-    public List<Produtos> getProduto() {
-        return produto;
+    public Produtos getProdutos() {
+        return produtos;
     }
 
 
-    public void setProduto(List<Produtos> produto) {
-        this.produto = produto;
+    public void setProdutos(Produtos produtos) {
+        this.produtos = produtos;
     }
-
-    
 }

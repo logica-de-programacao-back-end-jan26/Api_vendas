@@ -1,6 +1,9 @@
 package br.com.senai.api_vendas.entity;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -25,7 +29,7 @@ public class Produtos {
     @Size(max = 80, message = "O nome deve ter no máximo 80 caracteres")
     private String nome;
     
-    @NotBlank(message = "O campo descrição não pode ser vazio")
+    @Positive(message = "O campo preço não pode ser vazio")
     private Integer preco;
 
     @ManyToMany
@@ -34,14 +38,17 @@ public class Produtos {
         joinColumns = @JoinColumn(name = "fk_produto"),
         inverseJoinColumns = @JoinColumn(name = "fk_pedido")
     )
+    @JsonIgnoreProperties("produtos")
     private List<Pedido> pedidos;
     
 
     @OneToMany(mappedBy = "produtos")
+    @JsonIgnoreProperties("produtos")
     private List<Avaliacoes> avaliacoes;
 
     @ManyToOne
     @JoinColumn(name = "fk_categoria")
+    @JsonIgnoreProperties("produtos")
     private Categorias categoria;
 
     public Long getId() {

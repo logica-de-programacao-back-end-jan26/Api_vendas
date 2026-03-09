@@ -2,6 +2,9 @@ package br.com.senai.api_vendas.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,9 +43,11 @@ public class Cliente {
     
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnoreProperties("cliente")
     private List<Pedido> pedidos;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnoreProperties("cliente")
     private List<Avaliacoes> avaliacoes;
 
     public Long getId() {

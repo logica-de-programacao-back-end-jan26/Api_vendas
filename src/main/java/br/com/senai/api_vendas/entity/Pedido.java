@@ -4,6 +4,9 @@ package br.com.senai.api_vendas.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +15,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Pedido {
@@ -21,22 +26,24 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @PastOrPresent(message = "A data do pedido deve ser no presente")
-    @NotBlank(message = "O campo data do pedido não pode ser vazio")
+    
+    @NotNull(message = "O campo data do pedido não pode ser vazio")
     private LocalDateTime data_pedido;
 
-    @NotBlank(message = "O campo quantidade do pedido não pode ser vazio")
+    @Positive(message = "O campo quantidade do pedido não pode ser negativo")
     private Integer quantidade_pedido;
 
-    @NotBlank(message = "O campo status do pedido não pode ser vazio")
+    @NotNull(message = "O campo status do pedido não pode ser vazio")
     private Boolean status_pedido;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente")
+    @JsonIgnoreProperties("pedidos")
     private Cliente cliente;
 
    
     @ManyToMany(mappedBy = "pedidos")
+    @JsonIgnoreProperties("pedidos")
     private List<Produtos> produtos;
    
 
